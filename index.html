@@ -1,1042 +1,986 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+
+<!-- Mobile compatibility -->
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="theme-color" content="#8B2CDB">
 
-    <title>Upma & Vishesh ❤️</title>
+<title>Upma & Vishesh ❤️</title>
 
-    <style>
+<style>
 
-        /* =========================================
-           DESIGN VARIABLES
-        ========================================= */
+/* =========================================================
+   DESIGN VARIABLES
+========================================================= */
 
-        :root {
+:root {
+    --bg-env-start: #f1f5f9;
+    --bg-env-via: #f3e8ff;
+    --bg-env-end: #dbeafe;
 
-            --bg-env-start: #f1f5f9;
-            --bg-env-via: #f3e8ff;
-            --bg-env-end: #dbeafe;
+    --color-pink: #FF3366;
+    --color-pink-deep: #FF2A85;
+    --color-purple-light: #C233D3;
+    --color-purple: #8B2CDB;
 
-            --color-pink: #FF3366;
-            --color-pink-deep: #FF2A85;
-            --color-purple-light: #C233D3;
-            --color-purple: #8B2CDB;
+    --card-bg: linear-gradient(
+        135deg,
+        var(--color-pink) 0%,
+        var(--color-pink-deep) 40%,
+        var(--color-purple-light) 65%,
+        var(--color-purple) 100%
+    );
 
-            --card-bg: linear-gradient(
-                135deg,
-                var(--color-pink) 0%,
-                var(--color-pink-deep) 40%,
-                var(--color-purple-light) 65%,
-                var(--color-purple) 100%
-            );
+    --font-sans:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
 
-            --font-sans:
-                system-ui,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                "Helvetica Neue",
-                Arial,
-                sans-serif;
+    --font-mono:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Monaco,
+        Consolas,
+        monospace;
+}
 
-            --font-mono:
-                ui-monospace,
-                SFMono-Regular,
-                Menlo,
-                Monaco,
-                Consolas,
-                "Liberation Mono",
-                "Courier New",
-                monospace;
 
-            --text-main: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.85);
-        }
+/* =========================================================
+   RESET
+========================================================= */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        /* =========================================
-           DARK MODE
-        ========================================= */
+html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
-        @media (prefers-color-scheme: dark) {
+body {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
 
-            :root {
+    font-family: var(--font-sans);
 
-                --bg-env-start: #420f46;
-                --bg-env-via: #3b0764;
-                --bg-env-end: rgb(84, 22, 88);
+    background:
+        linear-gradient(
+            to bottom right,
+            var(--bg-env-start),
+            var(--bg-env-via),
+            var(--bg-env-end)
+        );
 
-            }
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        }
+    overflow: hidden;
 
+    position: relative;
 
-        /* =========================================
-           RESET
-        ========================================= */
+    color: white;
 
-        * {
+    -webkit-tap-highlight-color: transparent;
+}
 
-            margin: 0;
-            padding: 0;
 
-            box-sizing: border-box;
+/* =========================================================
+   BACKGROUND ORBS
+========================================================= */
 
-        }
+.orb {
+    position: absolute;
 
+    border-radius: 50%;
 
-        /* =========================================
-           BODY
-        ========================================= */
+    filter: blur(48px);
 
-        body {
+    z-index: 0;
 
-            font-family: var(--font-sans);
+    pointer-events: none;
+}
 
-            background:
-                linear-gradient(
-                    to bottom right,
-                    var(--bg-env-start),
-                    var(--bg-env-via),
-                    var(--bg-env-end)
-                );
+.orb-1 {
+    top: 5rem;
+    left: 5rem;
 
-            min-height: 100vh;
+    width: 24rem;
+    height: 24rem;
 
-            display: flex;
+    background: rgba(255, 51, 102, 0.15);
 
-            align-items: center;
-            justify-content: center;
+    animation:
+        float1 10s infinite ease-in-out;
+}
 
-            overflow: hidden;
+.orb-2 {
+    bottom: 5rem;
+    right: 5rem;
 
-            position: relative;
+    width: 24rem;
+    height: 24rem;
 
-            color: var(--text-main);
+    background: rgba(139, 44, 219, 0.15);
 
-        }
+    animation:
+        float2 12s infinite ease-in-out;
+}
 
 
-        /* =========================================
-           BACKGROUND ORBS
-        ========================================= */
+/* =========================================================
+   CARD WRAPPER
+========================================================= */
 
-        .orb {
+.card-wrapper {
+    position: relative;
 
-            position: absolute;
+    width: min(380px, 94vw);
 
-            border-radius: 50%;
+    /*
+       Keep the original card proportion.
+    */
+    aspect-ratio: 10 / 14.5;
 
-            filter: blur(48px);
+    perspective: 1500px;
 
-            z-index: 0;
+    z-index: 10;
 
-            pointer-events: none;
+    cursor: pointer;
 
-        }
+    flex-shrink: 0;
+}
 
 
-        .orb-1 {
+/* =========================================================
+   CARD
+========================================================= */
 
-            top: 5rem;
-            left: 5rem;
+.card-inner {
+    width: 100%;
+    height: 100%;
 
-            width: 24rem;
-            height: 24rem;
+    position: relative;
 
-            background-color:
-                rgba(255, 51, 102, 0.15);
+    border-radius: 1.75rem;
 
-            animation:
-                float-1 10s infinite ease-in-out;
+    background: var(--card-bg);
 
-        }
+    box-shadow:
+        0 30px 60px -15px rgba(0,0,0,0.6),
+        inset 0 1px 0 rgba(255,255,255,0.3);
 
+    transform-style: preserve-3d;
 
-        .orb-2 {
+    padding: 2.5rem 1.5rem;
 
-            bottom: 5rem;
-            right: 5rem;
+    display: flex;
+    flex-direction: column;
 
-            width: 24rem;
-            height: 24rem;
+    align-items: center;
+    justify-content: space-between;
 
-            background-color:
-                rgba(139, 44, 219, 0.15);
+    overflow: hidden;
 
-            animation:
-                float-2 12s infinite ease-in-out;
+    will-change: transform;
 
-        }
+    animation:
+        fadeInUp 0.8s ease-out forwards;
 
+    /*
+       Helps prevent mobile browser rendering issues.
+    */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
 
-        /* =========================================
-           CARD WRAPPER
-        ========================================= */
 
-        .card-wrapper {
+/* =========================================================
+   GLARE
+========================================================= */
 
-            position: relative;
+.glare {
+    position: absolute;
+    inset: 0;
 
-            width: 100%;
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(255,255,255,0.5) 0%,
+            transparent 60%
+        );
 
-            max-width: 380px;
+    opacity: 0;
 
-            aspect-ratio: 10 / 14.5;
+    pointer-events: none;
 
-            perspective: 1500px;
+    z-index: 3;
 
-            z-index: 10;
+    mix-blend-mode: overlay;
 
-            padding: 1rem;
+    transition: opacity 0.3s ease;
+}
 
-            cursor: pointer;
 
-        }
+/* =========================================================
+   SHIMMER
+========================================================= */
 
+.shimmer-container {
+    position: absolute;
+    inset: 0;
 
-        /* =========================================
-           CARD
-        ========================================= */
+    border-radius: 1.75rem;
 
-        .card-inner {
+    overflow: hidden;
 
-            width: 100%;
-            height: 100%;
+    pointer-events: none;
 
-            position: relative;
+    z-index: 1;
+}
 
-            border-radius: 1.75rem;
+.shimmer {
+    position: absolute;
+    inset: 0;
 
-            background:
-                var(--card-bg);
+    width: 100%;
+    height: 100%;
 
-            box-shadow:
+    background:
+        linear-gradient(
+            to top right,
+            transparent 0%,
+            rgba(255,255,255,0.15) 50%,
+            transparent 100%
+        );
 
-                0 30px 60px -15px
-                rgba(0, 0, 0, 0.6),
+    animation:
+        shimmer 4s infinite linear;
+}
 
-                inset 0 1px 0
-                rgba(255, 255, 255, 0.3);
 
-            transform-style: preserve-3d;
+/* =========================================================
+   CONTENT
+========================================================= */
 
-            padding: 2.5rem 1.5rem;
+.content-layer {
+    position: relative;
 
-            display: flex;
+    z-index: 4;
 
-            flex-direction: column;
+    height: 100%;
+    width: 100%;
 
-            align-items: center;
+    display: flex;
 
-            justify-content: space-between;
+    flex-direction: column;
 
-            overflow: hidden;
+    align-items: center;
 
-            will-change: transform;
+    justify-content: space-between;
 
-            animation:
-                fadeInUp 0.8s ease-out forwards;
+    transform-style: preserve-3d;
+}
 
-        }
 
+/* =========================================================
+   IMAGE
+========================================================= */
 
-        /* =========================================
-           GLARE
-        ========================================= */
+.circular-showcase {
+    position: relative;
 
-        .glare {
+    width: 195px;
+    height: 195px;
 
-            position: absolute;
+    margin-top: 0.5rem;
 
-            top: 0;
-            left: 0;
+    border-radius: 50%;
 
-            width: 100%;
-            height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-            background:
-                radial-gradient(
-                    circle at 50% 50%,
-                    rgba(255,255,255,0.5) 0%,
-                    transparent 60%
-                );
+    transform: translateZ(65px);
 
-            opacity: 0;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,0.4);
 
-            pointer-events: none;
+    flex-shrink: 0;
+}
 
-            z-index: 3;
+.progress-ring {
+    position: absolute;
 
-            mix-blend-mode: overlay;
+    inset: -12px;
 
-            transition:
-                opacity 0.3s ease;
+    width: calc(100% + 24px);
+    height: calc(100% + 24px);
 
-        }
+    pointer-events: none;
 
+    transform: rotate(-90deg);
+}
 
-        .card-wrapper:hover .glare {
+.progress-ring-circle-bg {
+    fill: none;
 
-            opacity: 1;
+    stroke: rgba(255,255,255,0.15);
 
-        }
+    stroke-width: 2;
+}
 
+.progress-ring-circle {
+    fill: none;
 
-        /* =========================================
-           SHIMMER
-        ========================================= */
+    stroke: white;
 
-        .shimmer-container {
+    stroke-width: 5;
 
-            position: absolute;
+    stroke-linecap: round;
 
-            inset: 0;
+    stroke-dasharray: 600;
 
-            border-radius: 1.75rem;
+    stroke-dashoffset: 0;
 
-            overflow: hidden;
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(255,255,255,0.8)
+        );
 
-            pointer-events: none;
+    animation:
+        circleFill 1.5s ease-out forwards;
+}
 
-            z-index: 1;
+.circular-image-wrapper {
+    width: 100%;
+    height: 100%;
 
-        }
+    border-radius: 50%;
 
+    padding: 4px;
 
-        .shimmer {
+    background: rgba(255,255,255,0.2);
 
-            position: absolute;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 
-            inset: 0;
+    overflow: hidden;
+}
 
-            width: 100%;
-            height: 100%;
+.circular-image-wrapper img {
+    width: 100%;
+    height: 100%;
 
-            background:
-                linear-gradient(
-                    to top right,
-                    transparent 0%,
-                    rgba(255,255,255,0.15) 50%,
-                    transparent 100%
-                );
+    object-fit: cover;
 
-            animation:
-                shimmer 4s infinite linear;
+    object-position: center;
 
-        }
+    border-radius: 50%;
 
+    display: block;
+}
 
-        /* =========================================
-           CONTENT
-        ========================================= */
 
-        .content-layer {
+/* =========================================================
+   TEXT
+========================================================= */
 
-            position: relative;
+.text-section {
+    text-align: center;
 
-            z-index: 4;
+    margin-top: 1.5rem;
 
-            height: 100%;
-            width: 100%;
+    margin-bottom: auto;
 
-            display: flex;
+    transform: translateZ(45px);
 
-            flex-direction: column;
+    width: 100%;
+}
 
-            align-items: center;
+.couple-names {
+    font-size: 2.04rem;
 
-            justify-content: space-between;
+    font-weight: 800;
 
-            transform-style: preserve-3d;
+    letter-spacing: 0.08em;
 
-        }
+    text-shadow:
+        0 4px 15px rgba(0,0,0,0.3);
 
+    margin-bottom: 0.4rem;
 
-        /* =========================================
-           CIRCULAR IMAGE
-        ========================================= */
+    white-space: nowrap;
+}
 
-        .circular-showcase {
+.start-date {
+    font-size: 1.05rem;
 
-            position: relative;
+    font-weight: 500;
 
-            width: 195px;
-            height: 195px;
+    color: rgba(255,255,255,0.85);
 
-            margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+}
 
-            border-radius: 50%;
 
-            display: flex;
+/* =========================================================
+   TIMER
+========================================================= */
 
-            align-items: center;
-            justify-content: center;
+.counter-container {
+    width: 100%;
 
-            transform:
-                translateZ(65px);
+    transform: translateZ(55px);
 
-            box-shadow:
-                0 20px 40px
-                rgba(0,0,0,0.4);
+    margin-bottom: 1.5rem;
 
-            will-change: transform;
+    flex-shrink: 0;
+}
 
-        }
+.counter-glass {
+    display: flex;
 
+    align-items: center;
+    justify-content: space-between;
 
-        /* =========================================
-           PROGRESS RING
-        ========================================= */
+    width: 100%;
 
-        .progress-ring {
+    background: rgba(255,255,255,0.12);
 
-            position: absolute;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 
-            inset: -12px;
+    border:
+        1px solid
+        rgba(255,255,255,0.35);
 
-            width:
-                calc(100% + 24px);
+    border-radius: 1.25rem;
 
-            height:
-                calc(100% + 24px);
+    padding: 1.25rem 0.5rem;
 
-            pointer-events: none;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+}
 
-            transform:
-                rotate(-90deg);
+.counter-item {
+    flex: 1;
 
-        }
+    min-width: 0;
 
+    display: flex;
 
-        .progress-ring-circle-bg {
+    flex-direction: column;
 
-            fill: none;
+    align-items: center;
 
-            stroke:
-                rgba(255,255,255,0.15);
+    justify-content: center;
 
-            stroke-width: 2;
+    gap: 2px;
+}
 
-        }
+.counter-divider {
+    width: 1px;
 
+    height: 28px;
 
-        .progress-ring-circle {
+    flex-shrink: 0;
 
-            fill: none;
+    background: rgba(255,255,255,0.25);
 
-            stroke: #ffffff;
+    border-radius: 1px;
+}
 
-            stroke-width: 5;
+.counter-num {
+    font-family: var(--font-mono);
 
-            stroke-linecap: round;
+    font-size: 1.49rem;
 
-            stroke-dasharray: 600;
+    font-weight: 700;
 
-            stroke-dashoffset: 0;
+    line-height: 1;
 
-            filter:
-                drop-shadow(
-                    0 0 10px
-                    rgba(255,255,255,0.8)
-                );
+    text-shadow:
+        0 2px 8px rgba(0,0,0,0.2);
 
-            animation:
-                circleFill 1.5s
-                ease-out forwards;
+    letter-spacing: 1px;
 
-        }
+    font-variant-numeric: tabular-nums;
+}
 
+.counter-unit {
+    font-size: 0.61rem;
 
-        /* =========================================
-           IMAGE
-        ========================================= */
+    text-transform: uppercase;
 
-        .circular-image-wrapper {
+    letter-spacing: 0.15em;
 
-            width: 100%;
-            height: 100%;
+    color: rgba(255,255,255,0.8);
 
-            border-radius: 50%;
+    font-weight: 600;
 
-            padding: 4px;
+    margin-top: 6px;
+}
 
-            background:
-                rgba(255,255,255,0.2);
 
-            backdrop-filter:
-                blur(4px);
+/* =========================================================
+   ANIMATIONS
+========================================================= */
 
-            overflow: hidden;
+@keyframes float1 {
 
-            position: relative;
+    0%,100% {
+        transform: translate(0,0);
+    }
 
-        }
+    50% {
+        transform: translate(40px,-20px);
+    }
+}
 
+@keyframes float2 {
 
-        .circular-image-wrapper img {
+    0%,100% {
+        transform: translate(0,0);
+    }
 
-            width: 100%;
-            height: 100%;
+    50% {
+        transform: translate(-40px,20px);
+    }
+}
 
-            object-fit: cover;
+@keyframes shimmer {
 
-            object-position: center;
+    0% {
+        transform: translateX(-150%);
+    }
 
-            border-radius: 50%;
+    100% {
+        transform: translateX(250%);
+    }
+}
 
-            background-color:
-                rgba(255,255,255,0.1);
+@keyframes fadeInUp {
 
-            display: block;
+    from {
+        opacity: 0;
 
-        }
+        transform:
+            scale(0.9)
+            translateY(30px)
+            rotateX(10deg);
+    }
 
+    to {
+        opacity: 1;
 
-        /* =========================================
-           NAME & DATE
-        ========================================= */
+        transform:
+            scale(1)
+            translateY(0)
+            rotateX(0deg);
+    }
+}
 
-        .text-section {
+@keyframes circleFill {
 
-            text-align: center;
+    from {
+        stroke-dashoffset: 600;
+    }
 
-            margin-top: 1.5rem;
+    to {
+        stroke-dashoffset: 0;
+    }
+}
 
-            margin-bottom: auto;
 
-            transform:
-                translateZ(45px);
+/* =========================================================
+   MOBILE
+========================================================= */
 
-            will-change: transform;
+@media (max-width: 420px) {
 
-        }
+    .card-wrapper {
+        width: 94vw;
+        max-width: 380px;
+    }
 
+    .card-inner {
+        padding:
+            2rem 1rem;
+    }
 
-        .couple-names {
+    .circular-showcase {
+        width: 175px;
+        height: 175px;
 
-            font-size: 2.04rem;
+        transform: translateZ(40px);
+    }
 
-            font-weight: 800;
+    .couple-names {
+        font-size: 1.65rem;
+        letter-spacing: 0.06em;
+    }
 
-            letter-spacing: 0.08em;
+    .start-date {
+        font-size: 0.9rem;
+    }
 
-            text-shadow:
-                0 4px 15px
-                rgba(0,0,0,0.3);
+    .counter-container {
+        margin-bottom: 0.75rem;
+        transform: translateZ(35px);
+    }
 
-            margin-bottom: 0.4rem;
+    .counter-glass {
+        padding:
+            1rem 0.25rem;
+    }
 
-        }
+    .counter-num {
+        font-size: 1.05rem;
+        letter-spacing: 0;
+    }
 
+    .counter-unit {
+        font-size: 0.45rem;
+        letter-spacing: 0.08em;
+    }
 
-        .start-date {
+    .counter-divider {
+        height: 24px;
+    }
+}
 
-            font-size: 1.05rem;
 
-            font-weight: 500;
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
 
-            color: var(--text-muted);
+@media (max-width: 360px) {
 
-            letter-spacing: 0.05em;
+    .card-wrapper {
+        width: 92vw;
+    }
 
-        }
+    .card-inner {
+        padding:
+            1.5rem 0.75rem;
+    }
 
+    .circular-showcase {
+        width: 150px;
+        height: 150px;
+    }
 
-        /* =========================================
-           COUNTER
-        ========================================= */
+    .couple-names {
+        font-size: 1.45rem;
+    }
 
-        .counter-container {
+    .start-date {
+        font-size: 0.78rem;
+    }
 
-            width: 100%;
+    .counter-glass {
+        padding:
+            0.8rem 0.15rem;
+    }
 
-            transform:
-                translateZ(55px);
+    .counter-num {
+        font-size: 0.9rem;
+    }
 
-            margin-bottom: 1.5rem;
+    .counter-unit {
+        font-size: 0.4rem;
+    }
 
-            will-change: transform;
+    .counter-divider {
+        height: 20px;
+    }
+}
 
-        }
 
+/* =========================================================
+   SHORT MOBILE SCREENS
+========================================================= */
 
-        .counter-glass {
+@media (max-height: 700px) and (max-width: 600px) {
 
-            display: flex;
+    .card-inner {
+        padding-top: 1.25rem;
+        padding-bottom: 1.25rem;
+    }
 
-            align-items: center;
+    .circular-showcase {
+        width: 145px;
+        height: 145px;
+    }
 
-            justify-content: space-between;
+    .text-section {
+        margin-top: 0.75rem;
+    }
 
-            background:
-                rgba(255,255,255,0.12);
+    .couple-names {
+        font-size: 1.45rem;
+    }
 
-            backdrop-filter:
-                blur(16px);
+    .start-date {
+        font-size: 0.8rem;
+    }
 
-            -webkit-backdrop-filter:
-                blur(16px);
+    .counter-container {
+        margin-bottom: 0.25rem;
+    }
 
-            border:
-                1px solid
-                rgba(255,255,255,0.35);
+    .counter-glass {
+        padding: 0.75rem 0.2rem;
+    }
+}
 
-            border-radius: 1.25rem;
 
-            padding: 1.25rem 0.5rem;
+/* =========================================================
+   TOUCH DEVICES
+========================================================= */
 
-            box-shadow:
+@media (hover: none) and (pointer: coarse) {
 
-                0 10px 30px
-                rgba(0,0,0,0.15),
+    .card-wrapper {
+        cursor: default;
+    }
 
-                inset 0 1px 0
-                rgba(255,255,255,0.2);
+    .glare {
+        opacity: 0 !important;
+    }
 
-        }
+}
 
 
-        .counter-item {
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
 
-            flex: 1;
+@media (prefers-reduced-motion: reduce) {
 
-            display: flex;
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+    }
+}
 
-            flex-direction: column;
-
-            align-items: center;
-
-            gap: 2px;
-
-        }
-
-
-        .counter-divider {
-
-            width: 1px;
-
-            height: 28px;
-
-            background:
-                rgba(255,255,255,0.25);
-
-            border-radius: 1px;
-
-        }
-
-
-        .counter-num {
-
-            font-family:
-                var(--font-mono);
-
-            font-size: 1.49rem;
-
-            font-weight: 700;
-
-            line-height: 1;
-
-            text-shadow:
-                0 2px 8px
-                rgba(0,0,0,0.2);
-
-            letter-spacing: 1px;
-
-        }
-
-
-        .counter-unit {
-
-            font-size: 0.61rem;
-
-            text-transform: uppercase;
-
-            letter-spacing: 0.15em;
-
-            color:
-                rgba(255,255,255,0.8);
-
-            font-weight: 600;
-
-            margin-top: 6px;
-
-        }
-
-
-        /* =========================================
-           ANIMATIONS
-        ========================================= */
-
-        @keyframes float-1 {
-
-            0%, 100% {
-                transform: translate(0,0);
-            }
-
-            50% {
-                transform: translate(40px,-20px);
-            }
-
-        }
-
-
-        @keyframes float-2 {
-
-            0%, 100% {
-                transform: translate(0,0);
-            }
-
-            50% {
-                transform: translate(-40px,20px);
-            }
-
-        }
-
-
-        @keyframes shimmer {
-
-            0% {
-                transform:
-                    translateX(-150%);
-            }
-
-            100% {
-                transform:
-                    translateX(250%);
-            }
-
-        }
-
-
-        @keyframes fadeInUp {
-
-            from {
-
-                opacity: 0;
-
-                transform:
-                    scale(0.9)
-                    translateY(30px)
-                    rotateX(10deg);
-
-            }
-
-            to {
-
-                opacity: 1;
-
-                transform:
-                    scale(1)
-                    translateY(0)
-                    rotateX(0deg);
-
-            }
-
-        }
-
-
-        @keyframes circleFill {
-
-            from {
-                stroke-dashoffset: 600;
-            }
-
-            to {
-                stroke-dashoffset: 0;
-            }
-
-        }
-
-
-        .preserve-3d {
-
-            transform-style:
-                preserve-3d;
-
-        }
-
-
-        /* =========================================
-           MOBILE
-        ========================================= */
-
-        @media (max-width: 420px) {
-
-            .card-wrapper {
-
-                max-width: 100%;
-
-                padding:
-                    0.75rem;
-
-            }
-
-            .circular-showcase {
-
-                width: 175px;
-                height: 175px;
-
-            }
-
-            .couple-names {
-
-                font-size: 1.75rem;
-
-            }
-
-            .counter-num {
-
-                font-size: 1.15rem;
-
-            }
-
-            .counter-unit {
-
-                font-size: 0.5rem;
-
-            }
-
-        }
-
-    </style>
+</style>
 </head>
 
 
 <body>
 
-
-    <!-- =========================================
-         BACKGROUND
-    ========================================== -->
-
-    <div class="orb orb-1"></div>
-
-    <div class="orb orb-2"></div>
+<!-- Background -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
 
 
-    <!-- =========================================
-         CARD
-    ========================================== -->
+<!-- =====================================================
+     CARD
+===================================================== -->
 
-    <div
-        class="card-wrapper"
-        id="card-wrapper"
-    >
+<div class="card-wrapper" id="card-wrapper">
 
-        <div
-            class="card-inner preserve-3d"
-            id="card-inner"
-        >
+    <div class="card-inner" id="card-inner">
+
+        <!-- Glare -->
+        <div class="glare" id="card-glare"></div>
 
 
-            <!-- GLARE -->
-
-            <div
-                class="glare"
-                id="card-glare"
-            ></div>
+        <!-- Shimmer -->
+        <div class="shimmer-container">
+            <div class="shimmer"></div>
+        </div>
 
 
-            <!-- SHIMMER -->
+        <!-- Content -->
+        <div class="content-layer">
 
-            <div class="shimmer-container">
 
-                <div class="shimmer"></div>
+            <!-- =================================================
+                 IMAGE
+            ================================================== -->
+
+            <div class="circular-showcase">
+
+                <svg
+                    class="progress-ring"
+                    viewBox="0 0 200 200"
+                    aria-hidden="true"
+                >
+
+                    <circle
+                        class="progress-ring-circle-bg"
+                        cx="100"
+                        cy="100"
+                        r="94">
+                    </circle>
+
+                    <circle
+                        class="progress-ring-circle"
+                        cx="100"
+                        cy="100"
+                        r="94">
+                    </circle>
+
+                </svg>
+
+
+                <div class="circular-image-wrapper">
+
+                    <img
+                        id="couple-image"
+                        src="couple.jpg"
+                        alt="Upma and Vishesh"
+                        onerror="this.style.display='none';"
+                    >
+
+                </div>
 
             </div>
 
 
-            <!-- CONTENT -->
+            <!-- =================================================
+                 NAME & DATE
+            ================================================== -->
 
-            <div class="content-layer">
+            <div class="text-section">
 
-
-                <!-- =================================
-                     IMAGE
-                ================================== -->
-
-                <div class="circular-showcase">
-
-
-                    <svg
-                        class="progress-ring"
-                        viewBox="0 0 200 200"
-                    >
-
-                        <circle
-                            class="progress-ring-circle-bg"
-                            cx="100"
-                            cy="100"
-                            r="94"
-                        ></circle>
+                <h1
+                    class="couple-names"
+                    id="couple-names"
+                >
+                    UPMA & VISHESH
+                </h1>
 
 
-                        <circle
-                            class="progress-ring-circle"
-                            cx="100"
-                            cy="100"
-                            r="94"
-                        ></circle>
+                <p
+                    class="start-date"
+                    id="relationship-start-date"
+                >
+                    Together since 24th September 2025
+                </p>
 
-                    </svg>
+            </div>
 
 
-                    <div
-                        class="circular-image-wrapper"
-                    >
+            <!-- =================================================
+                 TIMER
+            ================================================== -->
 
-                        <img
-                            id="couple-image"
-                            src="couple.jpg"
-                            alt="Upma and Vishesh"
-                        >
+            <div class="counter-container">
+
+                <div class="counter-glass">
+
+
+                    <!-- MONTHS -->
+
+                    <div class="counter-item">
+
+                        <span
+                            class="counter-num"
+                            id="val-months"
+                        >00</span>
+
+                        <span class="counter-unit">
+                            Months
+                        </span>
 
                     </div>
 
-                </div>
+
+                    <div class="counter-divider"></div>
 
 
-                <!-- =================================
-                     NAME & DATE
-                ================================== -->
+                    <!-- DAYS -->
 
-                <div class="text-section">
+                    <div class="counter-item">
 
+                        <span
+                            class="counter-num"
+                            id="val-days"
+                        >00</span>
 
-                    <h1
-                        class="couple-names"
-                        id="couple-names"
-                    >
-                        UPMA & VISHESH
-                    </h1>
+                        <span class="counter-unit">
+                            Days
+                        </span>
 
-
-                    <p
-                        class="start-date"
-                        id="relationship-start-date"
-                    >
-                        Together since
-                        24th September 2025
-                    </p>
+                    </div>
 
 
-                </div>
+                    <div class="counter-divider"></div>
 
 
-                <!-- =================================
-                     LIVE COUNTER
-                ================================== -->
+                    <!-- HOURS -->
 
-                <div class="counter-container">
+                    <div class="counter-item">
 
+                        <span
+                            class="counter-num"
+                            id="val-hours"
+                        >00</span>
 
-                    <div class="counter-glass">
+                        <span class="counter-unit">
+                            Hours
+                        </span>
 
-
-                        <!-- MONTHS -->
-
-                        <div class="counter-item">
-
-                            <span
-                                class="counter-num"
-                                id="val-months"
-                            >
-                                00
-                            </span>
-
-                            <span class="counter-unit">
-                                Months
-                            </span>
-
-                        </div>
+                    </div>
 
 
-                        <div class="counter-divider"></div>
+                    <div class="counter-divider"></div>
 
 
-                        <!-- DAYS -->
+                    <!-- MINUTES -->
 
-                        <div class="counter-item">
+                    <div class="counter-item">
 
-                            <span
-                                class="counter-num"
-                                id="val-days"
-                            >
-                                00
-                            </span>
+                        <span
+                            class="counter-num"
+                            id="val-mins"
+                        >00</span>
 
-                            <span class="counter-unit">
-                                Days
-                            </span>
+                        <span class="counter-unit">
+                            Mins
+                        </span>
 
-                        </div>
+                    </div>
 
 
-                        <div class="counter-divider"></div>
+                    <div class="counter-divider"></div>
 
 
-                        <!-- HOURS -->
+                    <!-- SECONDS -->
 
-                        <div class="counter-item">
+                    <div class="counter-item">
 
-                            <span
-                                class="counter-num"
-                                id="val-hours"
-                            >
-                                00
-                            </span>
+                        <span
+                            class="counter-num"
+                            id="val-secs"
+                        >00</span>
 
-                            <span class="counter-unit">
-                                Hours
-                            </span>
-
-                        </div>
-
-
-                        <div class="counter-divider"></div>
-
-
-                        <!-- MINUTES -->
-
-                        <div class="counter-item">
-
-                            <span
-                                class="counter-num"
-                                id="val-mins"
-                            >
-                                00
-                            </span>
-
-                            <span class="counter-unit">
-                                Mins
-                            </span>
-
-                        </div>
-
-
-                        <div class="counter-divider"></div>
-
-
-                        <!-- SECONDS -->
-
-                        <div class="counter-item">
-
-                            <span
-                                class="counter-num"
-                                id="val-secs"
-                            >
-                                00
-                            </span>
-
-                            <span class="counter-unit">
-                                Secs
-                            </span>
-
-                        </div>
-
+                        <span class="counter-unit">
+                            Secs
+                        </span>
 
                     </div>
 
@@ -1048,571 +992,535 @@
 
     </div>
 
+</div>
 
-    <!-- =========================================
-         JAVASCRIPT
-    ========================================== -->
 
-    <script>
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
 
+<script>
 
-        /* =========================================
-           CONFIGURATION
-        ========================================= */
+/*
+=========================================================
+  RELATIONSHIP START DATE
+=========================================================
 
-        const coupleData = {
+  24 September 2025
+  12:00 PM IST
 
-            names:
-                "Upma & Vishesh",
+  ISO 8601 format:
 
-            image:
-                "couple.jpg",
+  2025-09-24T12:00:00+05:30
 
-            /*
-             * START DATE & TIME
-             *
-             * 24 September 2025
-             * 12:00 PM
-             * Indian Standard Time (IST)
-             *
-             * +05:30 = India Standard Time
-             */
+  The +05:30 explicitly tells Chrome that this is IST.
+  This avoids browser timezone/date parsing problems.
+=========================================================
+*/
 
-            relationshipStart:
-                "2025-09-24T12:00:00+05:30"
+const START_TIME =
+    new Date("2025-09-24T12:00:00+05:30").getTime();
 
-        };
 
+/*
+=========================================================
+  ELEMENT REFERENCES
+=========================================================
+*/
 
-        /* =========================================
-           INITIALIZE
-        ========================================= */
+const monthsElement =
+    document.getElementById("val-months");
 
-        function initializeCard() {
+const daysElement =
+    document.getElementById("val-days");
 
+const hoursElement =
+    document.getElementById("val-hours");
 
-            document.getElementById(
-                "couple-names"
-            ).textContent =
-                coupleData.names.toUpperCase();
+const minutesElement =
+    document.getElementById("val-mins");
 
+const secondsElement =
+    document.getElementById("val-secs");
 
-            const image =
-                document.getElementById(
-                    "couple-image"
-                );
 
+/*
+=========================================================
+  PAD NUMBER
+=========================================================
+*/
 
-            image.src =
-                coupleData.image;
+function pad(number) {
 
+    return String(number).padStart(2, "0");
 
-            image.alt =
-                "Upma and Vishesh";
+}
 
 
-            document.getElementById(
-                "relationship-start-date"
-            ).textContent =
-                "Together since 24th September 2025";
+/*
+=========================================================
+  CALCULATE RELATIONSHIP TIME
+=========================================================
+*/
 
-        }
+function calculateTime() {
 
+    const now = Date.now();
 
-        /* =========================================
-           CALCULATE EXACT ELAPSED TIME
-        ========================================= */
+    /*
+       Difference between now and
+       24 September 2025, 12 PM IST.
+    */
 
-        function calculateElapsed() {
+    let difference =
+        now - START_TIME;
 
 
-            /*
-             * Start timestamp:
-             *
-             * 24 September 2025
-             * 12:00 PM IST
-             */
+    /*
+       If the current time is somehow
+       before the start date.
+    */
 
-            const start =
-                new Date(
-                    "2025-09-24T12:00:00+05:30"
-                );
+    if (difference < 0) {
 
+        difference = 0;
 
-            /*
-             * Current browser time
-             */
+    }
 
-            const now =
-                new Date();
 
+    /*
+       Current date/time in UTC.
+    */
 
-            /*
-             * If current time is before
-             * start time.
-             */
-
-            if (now < start) {
-
-                return {
-
-                    months: 0,
-                    days: 0,
-                    hours: 0,
-                    minutes: 0,
-                    seconds: 0
-
-                };
-
-            }
-
-
-            /*
-             * =====================================
-             * COMPLETE MONTHS
-             * =====================================
-             */
-
-            let totalMonths =
-                (
-                    (now.getFullYear()
-                    - start.getFullYear())
-                    * 12
-                )
-                +
-                (
-                    now.getMonth()
-                    - start.getMonth()
-                );
-
-
-            /*
-             * Candidate date after adding
-             * complete months.
-             */
-
-            let candidate =
-                new Date(start);
-
-
-            candidate.setMonth(
-                candidate.getMonth()
-                + totalMonths
-            );
-
-
-            /*
-             * If candidate is in the future,
-             * remove one month.
-             */
-
-            if (candidate > now) {
-
-                totalMonths--;
-
-                candidate =
-                    new Date(start);
-
-                candidate.setMonth(
-                    candidate.getMonth()
-                    + totalMonths
-                );
-
-            }
-
-
-            /*
-             * =====================================
-             * REMAINING TIME
-             * =====================================
-             */
-
-            let remaining =
-                now.getTime()
-                -
-                candidate.getTime();
-
-
-            const SECOND =
-                1000;
-
-
-            const MINUTE =
-                SECOND * 60;
-
-
-            const HOUR =
-                MINUTE * 60;
-
-
-            const DAY =
-                HOUR * 24;
-
-
-            /*
-             * Days
-             */
-
-            const days =
-                Math.floor(
-                    remaining / DAY
-                );
-
-
-            remaining =
-                remaining % DAY;
-
-
-            /*
-             * Hours
-             */
-
-            const hours =
-                Math.floor(
-                    remaining / HOUR
-                );
-
-
-            remaining =
-                remaining % HOUR;
-
-
-            /*
-             * Minutes
-             */
-
-            const minutes =
-                Math.floor(
-                    remaining / MINUTE
-                );
-
-
-            remaining =
-                remaining % MINUTE;
-
-
-            /*
-             * Seconds
-             */
-
-            const seconds =
-                Math.floor(
-                    remaining / SECOND
-                );
-
-
-            return {
-
-                months:
-                    totalMonths,
-
-                days:
-                    days,
-
-                hours:
-                    hours,
-
-                minutes:
-                    minutes,
-
-                seconds:
-                    seconds
-
-            };
-
-        }
-
-
-        /* =========================================
-           UPDATE COUNTER
-        ========================================= */
-
-        function updateLiveCounters() {
-
-
-            const elapsed =
-                calculateElapsed();
-
-
-            /*
-             * Always show at least
-             * two digits.
-             */
-
-            const pad =
-                (number) =>
-                    String(number)
-                    .padStart(2, "0");
-
-
-            document.getElementById(
-                "val-months"
-            ).textContent =
-                pad(elapsed.months);
-
-
-            document.getElementById(
-                "val-days"
-            ).textContent =
-                pad(elapsed.days);
-
-
-            document.getElementById(
-                "val-hours"
-            ).textContent =
-                pad(elapsed.hours);
-
-
-            document.getElementById(
-                "val-mins"
-            ).textContent =
-                pad(elapsed.minutes);
-
-
-            document.getElementById(
-                "val-secs"
-            ).textContent =
-                pad(elapsed.seconds);
-
-        }
-
-
-        /* =========================================
-           3D PARALLAX
-        ========================================= */
-
-        function setupSmoothParallax() {
-
-
-            const wrapper =
-                document.getElementById(
-                    "card-wrapper"
-                );
-
-
-            const inner =
-                document.getElementById(
-                    "card-inner"
-                );
-
-
-            const glare =
-                document.getElementById(
-                    "card-glare"
-                );
-
-
-            let targetX = 0;
-
-            let targetY = 0;
-
-            let currentX = 0;
-
-            let currentY = 0;
-
-            let isHovering = false;
-
-            let glareX = 50;
-
-            let glareY = 50;
-
-
-            const ease =
-                0.12;
-
-
-            /*
-             * Mouse movement
-             */
-
-            wrapper.addEventListener(
-                "mousemove",
-                (event) => {
-
-
-                    isHovering = true;
-
-
-                    const rect =
-                        wrapper
-                        .getBoundingClientRect();
-
-
-                    const x =
-                        event.clientX
-                        -
-                        rect.left;
-
-
-                    const y =
-                        event.clientY
-                        -
-                        rect.top;
-
-
-                    const centerX =
-                        rect.width / 2;
-
-
-                    const centerY =
-                        rect.height / 2;
-
-
-                    targetX =
-                        (
-                            (y - centerY)
-                            / centerY
-                        )
-                        * -20;
-
-
-                    targetY =
-                        (
-                            (x - centerX)
-                            / centerX
-                        )
-                        * 20;
-
-
-                    glareX =
-                        (x / rect.width)
-                        * 100;
-
-
-                    glareY =
-                        (y / rect.height)
-                        * 100;
-
-                }
-            );
-
-
-            /*
-             * Mouse leaves card
-             */
-
-            wrapper.addEventListener(
-                "mouseleave",
-                () => {
-
-                    isHovering = false;
-
-                    targetX = 0;
-
-                    targetY = 0;
-
-                    glareX = 50;
-
-                    glareY = 50;
-
-                }
-            );
-
-
-            /*
-             * Smooth animation
-             */
-
-            function render() {
-
-
-                currentX +=
-                    (
-                        targetX
-                        -
-                        currentX
-                    )
-                    * ease;
-
-
-                currentY +=
-                    (
-                        targetY
-                        -
-                        currentY
-                    )
-                    * ease;
-
-
-                const scale =
-                    isHovering
-                    ? 1.04
-                    : 1;
-
-
-                inner.style.transform =
-                    `
-                    rotateX(${currentX}deg)
-                    rotateY(${currentY}deg)
-                    scale(${scale})
-                    `;
-
-
-                if (isHovering) {
-
-                    glare.style.background =
-                        `
-                        radial-gradient(
-                            circle at
-                            ${glareX}%
-                            ${glareY}%,
-                            rgba(255,255,255,0.45)
-                            0%,
-                            transparent 65%
-                        )
-                        `;
-
-                }
-
-
-                requestAnimationFrame(
-                    render
-                );
-
-            }
-
-
-            render();
-
-        }
-
-
-        /* =========================================
-           START
-        ========================================= */
-
-        window.addEventListener(
-            "DOMContentLoaded",
-            () => {
-
-
-                initializeCard();
-
-
-                setupSmoothParallax();
-
-
-                /*
-                 * Update immediately
-                 */
-
-                updateLiveCounters();
-
-
-                /*
-                 * Update every second
-                 */
-
-                setInterval(
-                    updateLiveCounters,
-                    1000
-                );
-
-
-            }
+    const current =
+        new Date(now);
+
+
+    /*
+       Starting date in UTC.
+    */
+
+    const start =
+        new Date(START_TIME);
+
+
+    /*
+       Calculate approximate calendar months.
+    */
+
+    let months =
+        (
+            current.getUTCFullYear()
+            -
+            start.getUTCFullYear()
+        ) * 12
+        +
+        (
+            current.getUTCMonth()
+            -
+            start.getUTCMonth()
         );
 
-    </script>
+
+    /*
+       Find this month's anniversary.
+
+       The relationship started on
+       the 24th, so every monthly
+       anniversary is on the 24th.
+    */
+
+    let anniversary =
+        new Date(
+            Date.UTC(
+                start.getUTCFullYear(),
+                start.getUTCMonth() + months,
+                24,
+                6,
+                30,
+                0
+            )
+        );
+
+
+    /*
+       If this month's anniversary
+       hasn't happened yet, subtract
+       one month.
+    */
+
+    if (anniversary.getTime() > now) {
+
+        months--;
+
+        anniversary =
+            new Date(
+                Date.UTC(
+                    start.getUTCFullYear(),
+                    start.getUTCMonth() + months,
+                    24,
+                    6,
+                    30,
+                    0
+                )
+            );
+    }
+
+
+    /*
+       Remaining time after complete months.
+    */
+
+    let remaining =
+        now - anniversary.getTime();
+
+
+    const DAY =
+        24 * 60 * 60 * 1000;
+
+    const HOUR =
+        60 * 60 * 1000;
+
+    const MINUTE =
+        60 * 1000;
+
+    const SECOND =
+        1000;
+
+
+    /*
+       DAYS
+    */
+
+    const days =
+        Math.floor(
+            remaining / DAY
+        );
+
+    remaining =
+        remaining % DAY;
+
+
+    /*
+       HOURS
+    */
+
+    const hours =
+        Math.floor(
+            remaining / HOUR
+        );
+
+    remaining =
+        remaining % HOUR;
+
+
+    /*
+       MINUTES
+    */
+
+    const minutes =
+        Math.floor(
+            remaining / MINUTE
+        );
+
+    remaining =
+        remaining % MINUTE;
+
+
+    /*
+       SECONDS
+    */
+
+    const seconds =
+        Math.floor(
+            remaining / SECOND
+        );
+
+
+    /*
+       Update HTML.
+    */
+
+    monthsElement.textContent =
+        pad(Math.max(0, months));
+
+    daysElement.textContent =
+        pad(Math.max(0, days));
+
+    hoursElement.textContent =
+        pad(Math.max(0, hours));
+
+    minutesElement.textContent =
+        pad(Math.max(0, minutes));
+
+    secondsElement.textContent =
+        pad(Math.max(0, seconds));
+
+}
+
+
+/*
+=========================================================
+  INITIALIZE TIMER IMMEDIATELY
+=========================================================
+*/
+
+function startTimer() {
+
+    /*
+       Run immediately.
+       This prevents the page from
+       initially showing 00.
+    */
+
+    calculateTime();
+
+
+    /*
+       Update once every second.
+    */
+
+    setInterval(
+        calculateTime,
+        1000
+    );
+
+}
+
+
+/*
+=========================================================
+  INITIALIZE PAGE
+=========================================================
+*/
+
+function initializeCard() {
+
+    const nameElement =
+        document.getElementById("couple-names");
+
+    if (nameElement) {
+
+        nameElement.textContent =
+            "UPMA & VISHESH";
+
+    }
+
+
+    const imageElement =
+        document.getElementById("couple-image");
+
+    if (imageElement) {
+
+        imageElement.src =
+            "couple.jpg";
+
+    }
+
+
+    /*
+       Start timer.
+    */
+
+    startTimer();
+
+}
+
+
+/*
+=========================================================
+  DESKTOP 3D PARALLAX
+=========================================================
+
+  This is disabled on touch/mobile devices.
+
+  This prevents mobile Chrome from having
+  unnecessary mouse/animation handling.
+=========================================================
+*/
+
+function setupParallax() {
+
+    const wrapper =
+        document.getElementById("card-wrapper");
+
+    const inner =
+        document.getElementById("card-inner");
+
+    const glare =
+        document.getElementById("card-glare");
+
+
+    /*
+       Don't use parallax on touch screens.
+    */
+
+    const isTouchDevice =
+        window.matchMedia(
+            "(hover: none) and (pointer: coarse)"
+        ).matches;
+
+
+    if (isTouchDevice) {
+
+        return;
+
+    }
+
+
+    let targetX = 0;
+    let targetY = 0;
+
+    let currentX = 0;
+    let currentY = 0;
+
+    let hovering = false;
+
+    let glareX = 50;
+    let glareY = 50;
+
+
+    const ease = 0.12;
+
+
+    wrapper.addEventListener(
+        "mousemove",
+        function(event) {
+
+            hovering = true;
+
+
+            const rect =
+                wrapper.getBoundingClientRect();
+
+
+            const x =
+                event.clientX -
+                rect.left;
+
+
+            const y =
+                event.clientY -
+                rect.top;
+
+
+            const centerX =
+                rect.width / 2;
+
+
+            const centerY =
+                rect.height / 2;
+
+
+            targetX =
+                ((y - centerY) / centerY) * -20;
+
+
+            targetY =
+                ((x - centerX) / centerX) * 20;
+
+
+            glareX =
+                (x / rect.width) * 100;
+
+
+            glareY =
+                (y / rect.height) * 100;
+
+        }
+    );
+
+
+    wrapper.addEventListener(
+        "mouseleave",
+        function() {
+
+            hovering = false;
+
+            targetX = 0;
+            targetY = 0;
+
+        }
+    );
+
+
+    function render() {
+
+        currentX +=
+            (targetX - currentX) * ease;
+
+
+        currentY +=
+            (targetY - currentY) * ease;
+
+
+        const scale =
+            hovering ? 1.04 : 1;
+
+
+        inner.style.transform =
+            "rotateX(" +
+            currentX +
+            "deg) rotateY(" +
+            currentY +
+            "deg) scale(" +
+            scale +
+            ")";
+
+
+        if (hovering) {
+
+            glare.style.background =
+                "radial-gradient(" +
+                "circle at " +
+                glareX +
+                "% " +
+                glareY +
+                "%, " +
+                "rgba(255,255,255,.45) 0%, " +
+                "transparent 65%)";
+
+        }
+
+
+        requestAnimationFrame(render);
+
+    }
+
+
+    render();
+
+}
+
+
+/*
+=========================================================
+  PAGE START
+=========================================================
+*/
+
+if (
+    document.readyState === "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function() {
+
+            initializeCard();
+            setupParallax();
+
+        }
+    );
+
+} else {
+
+    initializeCard();
+    setupParallax();
+
+}
+
+</script>
 
 </body>
 </html>
