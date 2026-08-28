@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upma & Vishesh ❤️</title>
+    <title>Upma & Vishesh</title>
 
     <style>
         :root {
@@ -56,16 +56,19 @@
                 var(--bg-env-via),
                 var(--bg-env-end)
             );
+
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+
             overflow: hidden;
             position: relative;
             color: var(--text-main);
         }
 
         /* BACKGROUND ORBS */
+
         .orb {
             position: absolute;
             border-radius: 50%;
@@ -78,7 +81,9 @@
             left: 5rem;
             width: 24rem;
             height: 24rem;
+
             background-color: rgba(255, 51, 102, 0.15);
+
             animation: float-1 10s infinite ease-in-out;
         }
 
@@ -87,58 +92,88 @@
             right: 5rem;
             width: 24rem;
             height: 24rem;
+
             background-color: rgba(139, 44, 219, 0.15);
+
             animation: float-2 12s infinite ease-in-out;
         }
 
-        /* CARD WRAPPER */
+        /* CARD */
+
         .card-wrapper {
             position: relative;
+
             width: 100%;
             max-width: 380px;
+
             aspect-ratio: 10 / 14.5;
+
             perspective: 1500px;
+
             z-index: 10;
+
             padding: 1rem;
+
             cursor: pointer;
         }
 
         .card-inner {
             width: 100%;
             height: 100%;
+
             position: relative;
+
             border-radius: 1.75rem;
+
             box-shadow:
                 0 30px 60px -15px rgba(0, 0, 0, 0.6),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
             background: var(--card-bg);
+
             transform-style: preserve-3d;
+
             padding: 2.5rem 1.5rem;
+
             display: flex;
             flex-direction: column;
+
             align-items: center;
             justify-content: space-between;
+
             overflow: hidden;
+
             will-change: transform;
+
             animation: fadeInUp 0.8s ease-out forwards;
         }
 
         /* GLARE */
+
         .glare {
             position: absolute;
+
             top: 0;
             left: 0;
+
             width: 100%;
             height: 100%;
-            background: radial-gradient(
-                circle at 50% 50%,
-                rgba(255, 255, 255, 0.5) 0%,
-                transparent 60%
-            );
+
+            background:
+                radial-gradient(
+                    circle at 50% 50%,
+                    rgba(255, 255, 255, 0.5) 0%,
+                    transparent 60%
+                );
+
             opacity: 0;
+
             pointer-events: none;
+
             z-index: 3;
+
             mix-blend-mode: overlay;
+
             transition: opacity 0.3s ease;
         }
 
@@ -147,145 +182,230 @@
         }
 
         /* SHIMMER */
+
         .shimmer-container {
             position: absolute;
+
             inset: 0;
+
             border-radius: 1.75rem;
+
             overflow: hidden;
+
             pointer-events: none;
+
             z-index: 1;
         }
 
         .shimmer {
             position: absolute;
+
             inset: 0;
+
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                to top right,
-                transparent 0%,
-                rgba(255, 255, 255, 0.15) 50%,
-                transparent 100%
-            );
+
+            background:
+                linear-gradient(
+                    to top right,
+                    transparent 0%,
+                    rgba(255,255,255,0.15) 50%,
+                    transparent 100%
+                );
+
             animation: shimmer 4s infinite linear;
         }
 
         /* CONTENT */
+
         .content-layer {
             position: relative;
+
             z-index: 4;
+
             height: 100%;
             width: 100%;
+
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             justify-content: space-between;
+
             transform-style: preserve-3d;
         }
 
         /* CIRCULAR IMAGE */
+
         .circular-showcase {
             position: relative;
+
             width: 195px;
             height: 195px;
+
             margin-top: 0.5rem;
+
             border-radius: 50%;
+
             display: flex;
+
             align-items: center;
             justify-content: center;
+
             transform: translateZ(65px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+            box-shadow:
+                0 20px 40px rgba(0,0,0,0.4);
+
             will-change: transform;
         }
 
         .progress-ring {
             position: absolute;
+
             inset: -12px;
+
             width: calc(100% + 24px);
             height: calc(100% + 24px);
+
             pointer-events: none;
+
             transform: rotate(-90deg);
         }
 
         .progress-ring-circle-bg {
             fill: none;
+
             stroke: rgba(255, 255, 255, 0.15);
+
             stroke-width: 2;
         }
 
         .progress-ring-circle {
             fill: none;
+
             stroke: #ffffff;
+
             stroke-width: 5;
+
             stroke-linecap: round;
+
             stroke-dasharray: 600;
+
             stroke-dashoffset: 0;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-            animation: circleFill 1.5s ease-out forwards;
+
+            filter:
+                drop-shadow(
+                    0 0 10px rgba(255, 255, 255, 0.8)
+                );
+
+            animation:
+                circleFill 1.5s ease-out forwards;
         }
 
         .circular-image-wrapper {
             width: 100%;
             height: 100%;
+
             border-radius: 50%;
+
             padding: 4px;
-            background: rgba(255, 255, 255, 0.2);
+
+            background: rgba(255,255,255,0.2);
+
             backdrop-filter: blur(4px);
+
             overflow: hidden;
+
             position: relative;
         }
 
         .circular-image-wrapper img {
             width: 100%;
             height: 100%;
+
             object-fit: cover;
+
             object-position: center;
+
             border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
+
+            background-color:
+                rgba(255, 255, 255, 0.1);
         }
 
         /* NAMES & DATE */
+
         .text-section {
             text-align: center;
+
             margin-top: 1.5rem;
+
             margin-bottom: auto;
+
             transform: translateZ(45px);
+
             will-change: transform;
         }
 
         .couple-names {
             font-size: 2.04rem;
+
             font-weight: 800;
+
             letter-spacing: 0.08em;
-            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+
+            text-shadow:
+                0 4px 15px rgba(0,0,0,0.3);
+
             margin-bottom: 0.4rem;
         }
 
         .start-date {
             font-size: 1.05rem;
+
             font-weight: 500;
+
             color: var(--text-muted);
+
             letter-spacing: 0.05em;
         }
 
-        /* LIVE COUNTER */
+        /* COUNTER */
+
         .counter-container {
             width: 100%;
+
             transform: translateZ(55px);
+
             margin-bottom: 1.5rem;
+
             will-change: transform;
         }
 
         .counter-glass {
             display: flex;
+
             align-items: center;
+
             justify-content: space-between;
-            background: rgba(255, 255, 255, 0.12);
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
             backdrop-filter: blur(16px);
+
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.35);
+
+            border:
+                1px solid rgba(255, 255, 255, 0.35);
+
             border-radius: 1.25rem;
+
             padding: 1.25rem 0.5rem;
+
             box-shadow:
                 0 10px 30px rgba(0, 0, 0, 0.15),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
@@ -293,203 +413,415 @@
 
         .counter-item {
             flex: 1;
+
             display: flex;
+
             flex-direction: column;
+
             align-items: center;
+
             gap: 2px;
         }
 
         .counter-divider {
             width: 1px;
+
             height: 28px;
-            background: rgba(255, 255, 255, 0.25);
+
+            background:
+                rgba(255, 255, 255, 0.25);
+
             border-radius: 1px;
         }
 
         .counter-num {
             font-family: var(--font-mono);
+
             font-size: 1.49rem;
+
             font-weight: 700;
+
             line-height: 1;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+            text-shadow:
+                0 2px 8px rgba(0,0,0,0.2);
+
             letter-spacing: 1px;
         }
 
         .counter-unit {
             font-size: 0.61rem;
+
             text-transform: uppercase;
+
             letter-spacing: 0.15em;
-            color: rgba(255, 255, 255, 0.8);
+
+            color:
+                rgba(255, 255, 255, 0.8);
+
             font-weight: 600;
+
             margin-top: 6px;
         }
 
         /* ANIMATIONS */
+
         @keyframes float-1 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(40px, -20px); }
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(40px, -20px);
+            }
         }
 
         @keyframes float-2 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-40px, 20px); }
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-40px, 20px);
+            }
         }
 
         @keyframes shimmer {
-            0% { transform: translateX(-150%); }
-            100% { transform: translateX(250%); }
+            0% {
+                transform: translateX(-150%);
+            }
+
+            100% {
+                transform: translateX(250%);
+            }
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: scale(0.9) translateY(30px) rotateX(10deg);
+
+                transform:
+                    scale(0.9)
+                    translateY(30px)
+                    rotateX(10deg);
             }
+
             to {
                 opacity: 1;
-                transform: scale(1) translateY(0) rotateX(0deg);
+
+                transform:
+                    scale(1)
+                    translateY(0)
+                    rotateX(0deg);
             }
         }
 
         @keyframes circleFill {
-            from { stroke-dashoffset: 600; }
-            to { stroke-dashoffset: 0; }
+            from {
+                stroke-dashoffset: 600;
+            }
+
+            to {
+                stroke-dashoffset: 0;
+            }
         }
 
         .preserve-3d {
             transform-style: preserve-3d;
         }
 
-        /* MOBILE */
-        @media (max-width: 480px) {
-            .card-wrapper { max-width: 360px; }
-            .circular-showcase { width: 180px; height: 180px; }
-            .couple-names { font-size: 1.8rem; }
-            .counter-num { font-size: 1.25rem; }
-            .counter-unit { font-size: 0.55rem; }
-        }
     </style>
 </head>
 
 <body>
 
     <!-- Background -->
+
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
+
     <!-- Card -->
+
     <div class="card-wrapper" id="card-wrapper">
-        <div class="card-inner preserve-3d" id="card-inner">
+
+        <div
+            class="card-inner preserve-3d"
+            id="card-inner"
+        >
 
             <!-- Glare -->
-            <div class="glare" id="card-glare"></div>
+
+            <div
+                class="glare"
+                id="card-glare"
+            ></div>
+
 
             <!-- Shimmer -->
+
             <div class="shimmer-container">
                 <div class="shimmer"></div>
             </div>
 
-            <!-- Main Content -->
+
+            <!-- Content -->
+
             <div class="content-layer">
 
                 <!-- Circular Image -->
+
                 <div class="circular-showcase">
-                    <svg class="progress-ring" viewBox="0 0 200 200">
-                        <circle class="progress-ring-circle-bg" cx="100" cy="100" r="94"></circle>
-                        <circle class="progress-ring-circle" cx="100" cy="100" r="94"></circle>
+
+                    <svg
+                        class="progress-ring"
+                        viewBox="0 0 200 200"
+                    >
+
+                        <circle
+                            class="progress-ring-circle-bg"
+                            cx="100"
+                            cy="100"
+                            r="94"
+                        ></circle>
+
+                        <circle
+                            class="progress-ring-circle"
+                            cx="100"
+                            cy="100"
+                            r="94"
+                        ></circle>
+
                     </svg>
 
+
                     <div class="circular-image-wrapper">
-                        <img id="couple-image" src="couple.jpg" alt="Upma and Vishesh">
+
+                        <img
+                            id="couple-image"
+                            src="couple.jpg"
+                            alt="Upma and Vishesh"
+                        >
+
                     </div>
+
                 </div>
+
 
                 <!-- Names & Date -->
+
                 <div class="text-section">
-                    <h1 class="couple-names" id="couple-names">UPMA & VISHESH</h1>
-                    <p class="start-date" id="relationship-start-date">Together since 24th September 2025</p>
+
+                    <h1
+                        class="couple-names"
+                        id="couple-names"
+                    >
+                        UPMA & VISHESH
+                    </h1>
+
+
+                    <p
+                        class="start-date"
+                        id="relationship-start-date"
+                    >
+                        Together since 24th September 2025
+                    </p>
+
                 </div>
 
+
                 <!-- Live Counter -->
+
                 <div class="counter-container">
+
                     <div class="counter-glass">
+
                         <div class="counter-item">
-                            <span class="counter-num" id="val-months">--</span>
-                            <span class="counter-unit">Months</span>
+
+                            <span
+                                class="counter-num"
+                                id="val-months"
+                            >
+                                00
+                            </span>
+
+                            <span class="counter-unit">
+                                Months
+                            </span>
+
                         </div>
+
 
                         <div class="counter-divider"></div>
 
+
                         <div class="counter-item">
-                            <span class="counter-num" id="val-days">--</span>
-                            <span class="counter-unit">Days</span>
+
+                            <span
+                                class="counter-num"
+                                id="val-days"
+                            >
+                                00
+                            </span>
+
+                            <span class="counter-unit">
+                                Days
+                            </span>
+
                         </div>
+
 
                         <div class="counter-divider"></div>
 
+
                         <div class="counter-item">
-                            <span class="counter-num" id="val-hours">--</span>
-                            <span class="counter-unit">Hours</span>
+
+                            <span
+                                class="counter-num"
+                                id="val-hours"
+                            >
+                                00
+                            </span>
+
+                            <span class="counter-unit">
+                                Hours
+                            </span>
+
                         </div>
+
 
                         <div class="counter-divider"></div>
 
+
                         <div class="counter-item">
-                            <span class="counter-num" id="val-mins">--</span>
-                            <span class="counter-unit">Mins</span>
+
+                            <span
+                                class="counter-num"
+                                id="val-mins"
+                            >
+                                00
+                            </span>
+
+                            <span class="counter-unit">
+                                Mins
+                            </span>
+
                         </div>
+
 
                         <div class="counter-divider"></div>
 
+
                         <div class="counter-item">
-                            <span class="counter-num" id="val-secs">--</span>
-                            <span class="counter-unit">Secs</span>
+
+                            <span
+                                class="counter-num"
+                                id="val-secs"
+                            >
+                                00
+                            </span>
+
+                            <span class="counter-unit">
+                                Secs
+                            </span>
+
                         </div>
+
                     </div>
+
                 </div>
 
             </div>
+
         </div>
+
     </div>
 
-    <!-- JavaScript -->
+
+    <!-- APPLICATION LOGIC -->
+
     <script>
+
+        /*
+         * ==========================================
+         * RELATIONSHIP CONFIGURATION
+         * ==========================================
+         */
+
         const coupleData = {
+
             names: "Upma & Vishesh",
+
             image: "couple.jpg",
-            relationshipStart: "2025-09-24T00:00:00"
+
+            /*
+             * IMPORTANT:
+             * 24 September 2025
+             * 12:00 PM / Noon
+             *
+             * T = 12:00 PM
+             */
+
+            relationshipStart:
+                "2025-09-24T12:00:00"
+
         };
 
+
+        /*
+         * ==========================================
+         * INITIALIZE CARD
+         * ==========================================
+         */
+
         function initializeCard() {
-            document.getElementById('couple-names').textContent = coupleData.names.toUpperCase();
 
-            const imgEl = document.getElementById('couple-image');
-            imgEl.src = coupleData.image;
+            document.getElementById(
+                "couple-names"
+            ).textContent =
+                coupleData.names.toUpperCase();
 
-            const startDate = new Date(coupleData.relationshipStart);
-            const day = startDate.getDate();
-            const month = startDate.toLocaleDateString('en-GB', { month: 'long' });
-            const year = startDate.getFullYear();
 
-            const getOrdinal = (n) => {
-                if (n > 3 && n < 21) return n + 'th';
-                switch (n % 10) {
-                    case 1: return n + "st";
-                    case 2: return n + "nd";
-                    case 3: return n + "rd";
-                    default: return n + "th";
-                }
-            };
+            const img =
+                document.getElementById(
+                    "couple-image"
+                );
 
-            const formattedDate = `${getOrdinal(day)} ${month} ${year}`;
-            document.getElementById('relationship-start-date').textContent = `Together since ${formattedDate}`;
+            img.src = coupleData.image;
+
+            img.alt =
+                "Upma and Vishesh";
+
+
+            document.getElementById(
+                "relationship-start-date"
+            ).textContent =
+                "Together since 24th September 2025";
         }
 
+
+        /*
+         * ==========================================
+         * ELAPSED TIME CALCULATOR
+         * ==========================================
+         */
+
         function calculateElapsed(startDate) {
-            const now = new Date();
-            const start = new Date(startDate);
+
+            const start =
+                new Date(startDate);
+
+            const now =
+                new Date();
+
+
+            /*
+             * If current time is before
+             * relationship start time
+             */
 
             if (now < start) {
+
                 return {
                     months: 0,
                     days: 0,
@@ -499,88 +831,117 @@
                 };
             }
 
-            let years = now.getFullYear() - start.getFullYear();
-            let months = now.getMonth() - start.getMonth();
-            let days = now.getDate() - start.getDate();
-            let hours = now.getHours() - start.getHours();
-            let minutes = now.getMinutes() - start.getMinutes();
-            let seconds = now.getSeconds() - start.getSeconds();
 
-            if (seconds < 0) {
-                minutes--;
-                seconds += 60;
-            }
+            /*
+             * Calculate complete years
+             * and months first.
+             */
 
-            if (minutes < 0) {
-                hours--;
-                minutes += 60;
-            }
+            let years =
+                now.getFullYear()
+                - start.getFullYear();
 
-            if (hours < 0) {
-                days--;
-                hours += 24;
-            }
 
-            if (days < 0) {
-                months--;
-                const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-                days += prevMonth.getDate();
-            }
+            let months =
+                now.getMonth()
+                - start.getMonth();
+
 
             if (months < 0) {
+
                 years--;
+
                 months += 12;
             }
 
-            const totalMonths = (years * 12) + months;
 
-            return {
-                months: totalMonths,
-                days,
-                hours,
-                minutes,
-                seconds
-            };
-        }
+            /*
+             * Create anniversary point
+             * after complete months.
+             */
 
-        function updateLiveCounters() {
-            const elapsed = calculateElapsed(coupleData.relationshipStart);
-            const format = (num) => String(num).padStart(2, '0');
+            let anniversary =
+                new Date(
+                    start.getFullYear() + years,
+                    start.getMonth() + months,
+                    start.getDate(),
+                    start.getHours(),
+                    start.getMinutes(),
+                    start.getSeconds()
+                );
 
-            document.getElementById('val-months').textContent = format(elapsed.months);
-            document.getElementById('val-days').textContent = format(elapsed.days);
-            document.getElementById('val-hours').textContent = format(elapsed.hours);
-            document.getElementById('val-mins').textContent = format(elapsed.minutes);
-            document.getElementById('val-secs').textContent = format(elapsed.seconds);
-        }
 
-        // Tilt effect
-        const cardWrapper = document.getElementById('card-wrapper');
-        const cardInner = document.getElementById('card-inner');
+            /*
+             * Handle cases where anniversary
+             * has not yet occurred this month.
+             */
 
-        cardWrapper.addEventListener('mousemove', (e) => {
-            const rect = cardWrapper.getBoundingClientRect();
-            const x = e.clientX - rect.left - rect.width / 2;
-            const y = e.clientY - rect.top - rect.height / 2;
+            if (anniversary > now) {
 
-            const rotateX = -(y / (rect.height / 2)) * 12;
-            const rotateY = (x / (rect.width / 2)) * 12;
+                months--;
 
-            cardInner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
+                if (months < 0) {
 
-        cardWrapper.addEventListener('mouseleave', () => {
-            cardInner.style.transform = 'rotateX(0deg) rotateY(0deg)';
-            cardInner.style.transition = 'transform 0.5s ease';
-        });
+                    years--;
 
-        cardWrapper.addEventListener('mouseenter', () => {
-            cardInner.style.transition = 'none';
-        });
+                    months += 12;
+                }
 
-        initializeCard();
-        updateLiveCounters();
-        setInterval(updateLiveCounters, 1000);
-    </script>
-</body>
-</html>
+
+                anniversary =
+                    new Date(
+                        start.getFullYear() + years,
+                        start.getMonth() + months,
+                        start.getDate(),
+                        start.getHours(),
+                        start.getMinutes(),
+                        start.getSeconds()
+                    );
+            }
+
+
+            /*
+             * Remaining time after
+             * complete months.
+             */
+
+            let difference =
+                now.getTime()
+                - anniversary.getTime();
+
+
+            const SECOND =
+                1000;
+
+            const MINUTE =
+                60 * SECOND;
+
+            const HOUR =
+                60 * MINUTE;
+
+            const DAY =
+                24 * HOUR;
+
+
+            const days =
+                Math.floor(
+                    difference / DAY
+                );
+
+
+            difference %= DAY;
+
+
+            const hours =
+                Math.floor(
+                    difference / HOUR
+                );
+
+
+            difference %= HOUR;
+
+
+            const minutes =
+                Math.floor(
+                    difference / MINUTE
+  
