@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upma & Vishesh</title>
+
+    <title>Upma & Vishesh ❤️</title>
 
     <style>
+
+        /* =========================================
+           DESIGN VARIABLES
+        ========================================= */
+
         :root {
+
             --bg-env-start: #f1f5f9;
             --bg-env-via: #f3e8ff;
             --bg-env-end: #dbeafe;
@@ -24,86 +31,157 @@
                 var(--color-purple) 100%
             );
 
-            --font-sans: system-ui, -apple-system, BlinkMacSystemFont,
-                "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-sans:
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                "Helvetica Neue",
+                Arial,
+                sans-serif;
 
-            --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco,
-                Consolas, "Liberation Mono", "Courier New", monospace;
+            --font-mono:
+                ui-monospace,
+                SFMono-Regular,
+                Menlo,
+                Monaco,
+                Consolas,
+                "Liberation Mono",
+                "Courier New",
+                monospace;
 
             --text-main: #ffffff;
             --text-muted: rgba(255, 255, 255, 0.85);
         }
 
+
+        /* =========================================
+           DARK MODE
+        ========================================= */
+
         @media (prefers-color-scheme: dark) {
+
             :root {
+
                 --bg-env-start: #420f46;
                 --bg-env-via: #3b0764;
                 --bg-env-end: rgb(84, 22, 88);
+
             }
+
         }
+
+
+        /* =========================================
+           RESET
+        ========================================= */
 
         * {
+
             margin: 0;
             padding: 0;
+
             box-sizing: border-box;
+
         }
 
+
+        /* =========================================
+           BODY
+        ========================================= */
+
         body {
+
             font-family: var(--font-sans);
-            background: linear-gradient(
-                to bottom right,
-                var(--bg-env-start),
-                var(--bg-env-via),
-                var(--bg-env-end)
-            );
+
+            background:
+                linear-gradient(
+                    to bottom right,
+                    var(--bg-env-start),
+                    var(--bg-env-via),
+                    var(--bg-env-end)
+                );
 
             min-height: 100vh;
+
             display: flex;
+
             align-items: center;
             justify-content: center;
 
             overflow: hidden;
+
             position: relative;
+
             color: var(--text-main);
+
         }
 
-        /* BACKGROUND ORBS */
+
+        /* =========================================
+           BACKGROUND ORBS
+        ========================================= */
 
         .orb {
+
             position: absolute;
+
             border-radius: 50%;
+
             filter: blur(48px);
+
             z-index: 0;
+
+            pointer-events: none;
+
         }
+
 
         .orb-1 {
+
             top: 5rem;
             left: 5rem;
+
             width: 24rem;
             height: 24rem;
 
-            background-color: rgba(255, 51, 102, 0.15);
+            background-color:
+                rgba(255, 51, 102, 0.15);
 
-            animation: float-1 10s infinite ease-in-out;
+            animation:
+                float-1 10s infinite ease-in-out;
+
         }
+
 
         .orb-2 {
+
             bottom: 5rem;
             right: 5rem;
+
             width: 24rem;
             height: 24rem;
 
-            background-color: rgba(139, 44, 219, 0.15);
+            background-color:
+                rgba(139, 44, 219, 0.15);
 
-            animation: float-2 12s infinite ease-in-out;
+            animation:
+                float-2 12s infinite ease-in-out;
+
         }
 
-        /* CARD */
+
+        /* =========================================
+           CARD WRAPPER
+        ========================================= */
 
         .card-wrapper {
+
             position: relative;
 
             width: 100%;
+
             max-width: 380px;
 
             aspect-ratio: 10 / 14.5;
@@ -115,9 +193,16 @@
             padding: 1rem;
 
             cursor: pointer;
+
         }
 
+
+        /* =========================================
+           CARD
+        ========================================= */
+
         .card-inner {
+
             width: 100%;
             height: 100%;
 
@@ -125,32 +210,45 @@
 
             border-radius: 1.75rem;
 
-            box-shadow:
-                0 30px 60px -15px rgba(0, 0, 0, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            background:
+                var(--card-bg);
 
-            background: var(--card-bg);
+            box-shadow:
+
+                0 30px 60px -15px
+                rgba(0, 0, 0, 0.6),
+
+                inset 0 1px 0
+                rgba(255, 255, 255, 0.3);
 
             transform-style: preserve-3d;
 
             padding: 2.5rem 1.5rem;
 
             display: flex;
+
             flex-direction: column;
 
             align-items: center;
+
             justify-content: space-between;
 
             overflow: hidden;
 
             will-change: transform;
 
-            animation: fadeInUp 0.8s ease-out forwards;
+            animation:
+                fadeInUp 0.8s ease-out forwards;
+
         }
 
-        /* GLARE */
+
+        /* =========================================
+           GLARE
+        ========================================= */
 
         .glare {
+
             position: absolute;
 
             top: 0;
@@ -162,7 +260,7 @@
             background:
                 radial-gradient(
                     circle at 50% 50%,
-                    rgba(255, 255, 255, 0.5) 0%,
+                    rgba(255,255,255,0.5) 0%,
                     transparent 60%
                 );
 
@@ -174,16 +272,25 @@
 
             mix-blend-mode: overlay;
 
-            transition: opacity 0.3s ease;
+            transition:
+                opacity 0.3s ease;
+
         }
+
 
         .card-wrapper:hover .glare {
+
             opacity: 1;
+
         }
 
-        /* SHIMMER */
+
+        /* =========================================
+           SHIMMER
+        ========================================= */
 
         .shimmer-container {
+
             position: absolute;
 
             inset: 0;
@@ -195,9 +302,12 @@
             pointer-events: none;
 
             z-index: 1;
+
         }
 
+
         .shimmer {
+
             position: absolute;
 
             inset: 0;
@@ -213,12 +323,18 @@
                     transparent 100%
                 );
 
-            animation: shimmer 4s infinite linear;
+            animation:
+                shimmer 4s infinite linear;
+
         }
 
-        /* CONTENT */
+
+        /* =========================================
+           CONTENT
+        ========================================= */
 
         .content-layer {
+
             position: relative;
 
             z-index: 4;
@@ -235,11 +351,16 @@
             justify-content: space-between;
 
             transform-style: preserve-3d;
+
         }
 
-        /* CIRCULAR IMAGE */
+
+        /* =========================================
+           CIRCULAR IMAGE
+        ========================================= */
 
         .circular-showcase {
+
             position: relative;
 
             width: 195px;
@@ -254,36 +375,56 @@
             align-items: center;
             justify-content: center;
 
-            transform: translateZ(65px);
+            transform:
+                translateZ(65px);
 
             box-shadow:
-                0 20px 40px rgba(0,0,0,0.4);
+                0 20px 40px
+                rgba(0,0,0,0.4);
 
             will-change: transform;
+
         }
 
+
+        /* =========================================
+           PROGRESS RING
+        ========================================= */
+
         .progress-ring {
+
             position: absolute;
 
             inset: -12px;
 
-            width: calc(100% + 24px);
-            height: calc(100% + 24px);
+            width:
+                calc(100% + 24px);
+
+            height:
+                calc(100% + 24px);
 
             pointer-events: none;
 
-            transform: rotate(-90deg);
+            transform:
+                rotate(-90deg);
+
         }
+
 
         .progress-ring-circle-bg {
+
             fill: none;
 
-            stroke: rgba(255, 255, 255, 0.15);
+            stroke:
+                rgba(255,255,255,0.15);
 
             stroke-width: 2;
+
         }
 
+
         .progress-ring-circle {
+
             fill: none;
 
             stroke: #ffffff;
@@ -298,14 +439,23 @@
 
             filter:
                 drop-shadow(
-                    0 0 10px rgba(255, 255, 255, 0.8)
+                    0 0 10px
+                    rgba(255,255,255,0.8)
                 );
 
             animation:
-                circleFill 1.5s ease-out forwards;
+                circleFill 1.5s
+                ease-out forwards;
+
         }
 
+
+        /* =========================================
+           IMAGE
+        ========================================= */
+
         .circular-image-wrapper {
+
             width: 100%;
             height: 100%;
 
@@ -313,16 +463,21 @@
 
             padding: 4px;
 
-            background: rgba(255,255,255,0.2);
+            background:
+                rgba(255,255,255,0.2);
 
-            backdrop-filter: blur(4px);
+            backdrop-filter:
+                blur(4px);
 
             overflow: hidden;
 
             position: relative;
+
         }
 
+
         .circular-image-wrapper img {
+
             width: 100%;
             height: 100%;
 
@@ -333,24 +488,35 @@
             border-radius: 50%;
 
             background-color:
-                rgba(255, 255, 255, 0.1);
+                rgba(255,255,255,0.1);
+
+            display: block;
+
         }
 
-        /* NAMES & DATE */
+
+        /* =========================================
+           NAME & DATE
+        ========================================= */
 
         .text-section {
+
             text-align: center;
 
             margin-top: 1.5rem;
 
             margin-bottom: auto;
 
-            transform: translateZ(45px);
+            transform:
+                translateZ(45px);
 
             will-change: transform;
+
         }
 
+
         .couple-names {
+
             font-size: 2.04rem;
 
             font-weight: 800;
@@ -358,12 +524,16 @@
             letter-spacing: 0.08em;
 
             text-shadow:
-                0 4px 15px rgba(0,0,0,0.3);
+                0 4px 15px
+                rgba(0,0,0,0.3);
 
             margin-bottom: 0.4rem;
+
         }
 
+
         .start-date {
+
             font-size: 1.05rem;
 
             font-weight: 500;
@@ -371,21 +541,30 @@
             color: var(--text-muted);
 
             letter-spacing: 0.05em;
+
         }
 
-        /* COUNTER */
+
+        /* =========================================
+           COUNTER
+        ========================================= */
 
         .counter-container {
+
             width: 100%;
 
-            transform: translateZ(55px);
+            transform:
+                translateZ(55px);
 
             margin-bottom: 1.5rem;
 
             will-change: transform;
+
         }
 
+
         .counter-glass {
+
             display: flex;
 
             align-items: center;
@@ -393,25 +572,35 @@
             justify-content: space-between;
 
             background:
-                rgba(255, 255, 255, 0.12);
+                rgba(255,255,255,0.12);
 
-            backdrop-filter: blur(16px);
+            backdrop-filter:
+                blur(16px);
 
-            -webkit-backdrop-filter: blur(16px);
+            -webkit-backdrop-filter:
+                blur(16px);
 
             border:
-                1px solid rgba(255, 255, 255, 0.35);
+                1px solid
+                rgba(255,255,255,0.35);
 
             border-radius: 1.25rem;
 
             padding: 1.25rem 0.5rem;
 
             box-shadow:
-                0 10px 30px rgba(0, 0, 0, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+                0 10px 30px
+                rgba(0,0,0,0.15),
+
+                inset 0 1px 0
+                rgba(255,255,255,0.2);
+
         }
 
+
         .counter-item {
+
             flex: 1;
 
             display: flex;
@@ -421,21 +610,28 @@
             align-items: center;
 
             gap: 2px;
+
         }
 
+
         .counter-divider {
+
             width: 1px;
 
             height: 28px;
 
             background:
-                rgba(255, 255, 255, 0.25);
+                rgba(255,255,255,0.25);
 
             border-radius: 1px;
+
         }
 
+
         .counter-num {
-            font-family: var(--font-mono);
+
+            font-family:
+                var(--font-mono);
 
             font-size: 1.49rem;
 
@@ -444,12 +640,16 @@
             line-height: 1;
 
             text-shadow:
-                0 2px 8px rgba(0,0,0,0.2);
+                0 2px 8px
+                rgba(0,0,0,0.2);
 
             letter-spacing: 1px;
+
         }
 
+
         .counter-unit {
+
             font-size: 0.61rem;
 
             text-transform: uppercase;
@@ -457,66 +657,89 @@
             letter-spacing: 0.15em;
 
             color:
-                rgba(255, 255, 255, 0.8);
+                rgba(255,255,255,0.8);
 
             font-weight: 600;
 
             margin-top: 6px;
+
         }
 
-        /* ANIMATIONS */
+
+        /* =========================================
+           ANIMATIONS
+        ========================================= */
 
         @keyframes float-1 {
+
             0%, 100% {
-                transform: translate(0, 0);
+                transform: translate(0,0);
             }
 
             50% {
-                transform: translate(40px, -20px);
+                transform: translate(40px,-20px);
             }
+
         }
+
 
         @keyframes float-2 {
+
             0%, 100% {
-                transform: translate(0, 0);
+                transform: translate(0,0);
             }
 
             50% {
-                transform: translate(-40px, 20px);
+                transform: translate(-40px,20px);
             }
+
         }
 
+
         @keyframes shimmer {
+
             0% {
-                transform: translateX(-150%);
+                transform:
+                    translateX(-150%);
             }
 
             100% {
-                transform: translateX(250%);
+                transform:
+                    translateX(250%);
             }
+
         }
 
+
         @keyframes fadeInUp {
+
             from {
+
                 opacity: 0;
 
                 transform:
                     scale(0.9)
                     translateY(30px)
                     rotateX(10deg);
+
             }
 
             to {
+
                 opacity: 1;
 
                 transform:
                     scale(1)
                     translateY(0)
                     rotateX(0deg);
+
             }
+
         }
 
+
         @keyframes circleFill {
+
             from {
                 stroke-dashoffset: 600;
             }
@@ -524,33 +747,92 @@
             to {
                 stroke-dashoffset: 0;
             }
+
         }
 
+
         .preserve-3d {
-            transform-style: preserve-3d;
+
+            transform-style:
+                preserve-3d;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 420px) {
+
+            .card-wrapper {
+
+                max-width: 100%;
+
+                padding:
+                    0.75rem;
+
+            }
+
+            .circular-showcase {
+
+                width: 175px;
+                height: 175px;
+
+            }
+
+            .couple-names {
+
+                font-size: 1.75rem;
+
+            }
+
+            .counter-num {
+
+                font-size: 1.15rem;
+
+            }
+
+            .counter-unit {
+
+                font-size: 0.5rem;
+
+            }
+
         }
 
     </style>
 </head>
 
+
 <body>
 
-    <!-- Background -->
+
+    <!-- =========================================
+         BACKGROUND
+    ========================================== -->
 
     <div class="orb orb-1"></div>
+
     <div class="orb orb-2"></div>
 
 
-    <!-- Card -->
+    <!-- =========================================
+         CARD
+    ========================================== -->
 
-    <div class="card-wrapper" id="card-wrapper">
+    <div
+        class="card-wrapper"
+        id="card-wrapper"
+    >
 
         <div
             class="card-inner preserve-3d"
             id="card-inner"
         >
 
-            <!-- Glare -->
+
+            <!-- GLARE -->
 
             <div
                 class="glare"
@@ -558,20 +840,26 @@
             ></div>
 
 
-            <!-- Shimmer -->
+            <!-- SHIMMER -->
 
             <div class="shimmer-container">
+
                 <div class="shimmer"></div>
+
             </div>
 
 
-            <!-- Content -->
+            <!-- CONTENT -->
 
             <div class="content-layer">
 
-                <!-- Circular Image -->
+
+                <!-- =================================
+                     IMAGE
+                ================================== -->
 
                 <div class="circular-showcase">
+
 
                     <svg
                         class="progress-ring"
@@ -585,6 +873,7 @@
                             r="94"
                         ></circle>
 
+
                         <circle
                             class="progress-ring-circle"
                             cx="100"
@@ -595,7 +884,9 @@
                     </svg>
 
 
-                    <div class="circular-image-wrapper">
+                    <div
+                        class="circular-image-wrapper"
+                    >
 
                         <img
                             id="couple-image"
@@ -608,9 +899,12 @@
                 </div>
 
 
-                <!-- Names & Date -->
+                <!-- =================================
+                     NAME & DATE
+                ================================== -->
 
                 <div class="text-section">
+
 
                     <h1
                         class="couple-names"
@@ -624,17 +918,25 @@
                         class="start-date"
                         id="relationship-start-date"
                     >
-                        Together since 24th September 2025
+                        Together since
+                        24th September 2025
                     </p>
+
 
                 </div>
 
 
-                <!-- Live Counter -->
+                <!-- =================================
+                     LIVE COUNTER
+                ================================== -->
 
                 <div class="counter-container">
 
+
                     <div class="counter-glass">
+
+
+                        <!-- MONTHS -->
 
                         <div class="counter-item">
 
@@ -655,6 +957,8 @@
                         <div class="counter-divider"></div>
 
 
+                        <!-- DAYS -->
+
                         <div class="counter-item">
 
                             <span
@@ -673,6 +977,8 @@
 
                         <div class="counter-divider"></div>
 
+
+                        <!-- HOURS -->
 
                         <div class="counter-item">
 
@@ -693,6 +999,8 @@
                         <div class="counter-divider"></div>
 
 
+                        <!-- MINUTES -->
+
                         <div class="counter-item">
 
                             <span
@@ -712,6 +1020,8 @@
                         <div class="counter-divider"></div>
 
 
+                        <!-- SECONDS -->
+
                         <div class="counter-item">
 
                             <span
@@ -727,6 +1037,7 @@
 
                         </div>
 
+
                     </div>
 
                 </div>
@@ -738,43 +1049,47 @@
     </div>
 
 
-    <!-- APPLICATION LOGIC -->
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
 
     <script>
 
-        /*
-         * ==========================================
-         * RELATIONSHIP CONFIGURATION
-         * ==========================================
-         */
+
+        /* =========================================
+           CONFIGURATION
+        ========================================= */
 
         const coupleData = {
 
-            names: "Upma & Vishesh",
+            names:
+                "Upma & Vishesh",
 
-            image: "couple.jpg",
+            image:
+                "couple.jpg",
 
             /*
-             * IMPORTANT:
-             * 24 September 2025
-             * 12:00 PM / Noon
+             * START DATE & TIME
              *
-             * T = 12:00 PM
+             * 24 September 2025
+             * 12:00 PM
+             * Indian Standard Time (IST)
+             *
+             * +05:30 = India Standard Time
              */
 
             relationshipStart:
-                "2025-09-24T12:00:00"
+                "2025-09-24T12:00:00+05:30"
 
         };
 
 
-        /*
-         * ==========================================
-         * INITIALIZE CARD
-         * ==========================================
-         */
+        /* =========================================
+           INITIALIZE
+        ========================================= */
 
         function initializeCard() {
+
 
             document.getElementById(
                 "couple-names"
@@ -782,14 +1097,17 @@
                 coupleData.names.toUpperCase();
 
 
-            const img =
+            const image =
                 document.getElementById(
                     "couple-image"
                 );
 
-            img.src = coupleData.image;
 
-            img.alt =
+            image.src =
+                coupleData.image;
+
+
+            image.alt =
                 "Upma and Vishesh";
 
 
@@ -797,19 +1115,33 @@
                 "relationship-start-date"
             ).textContent =
                 "Together since 24th September 2025";
+
         }
 
 
-        /*
-         * ==========================================
-         * ELAPSED TIME CALCULATOR
-         * ==========================================
-         */
+        /* =========================================
+           CALCULATE EXACT ELAPSED TIME
+        ========================================= */
 
-        function calculateElapsed(startDate) {
+        function calculateElapsed() {
+
+
+            /*
+             * Start timestamp:
+             *
+             * 24 September 2025
+             * 12:00 PM IST
+             */
 
             const start =
-                new Date(startDate);
+                new Date(
+                    "2025-09-24T12:00:00+05:30"
+                );
+
+
+            /*
+             * Current browser time
+             */
 
             const now =
                 new Date();
@@ -817,131 +1149,470 @@
 
             /*
              * If current time is before
-             * relationship start time
+             * start time.
              */
 
             if (now < start) {
 
                 return {
+
                     months: 0,
                     days: 0,
                     hours: 0,
                     minutes: 0,
                     seconds: 0
+
                 };
+
             }
 
 
             /*
-             * Calculate complete years
-             * and months first.
+             * =====================================
+             * COMPLETE MONTHS
+             * =====================================
              */
 
-            let years =
-                now.getFullYear()
-                - start.getFullYear();
-
-
-            let months =
-                now.getMonth()
-                - start.getMonth();
-
-
-            if (months < 0) {
-
-                years--;
-
-                months += 12;
-            }
-
-
-            /*
-             * Create anniversary point
-             * after complete months.
-             */
-
-            let anniversary =
-                new Date(
-                    start.getFullYear() + years,
-                    start.getMonth() + months,
-                    start.getDate(),
-                    start.getHours(),
-                    start.getMinutes(),
-                    start.getSeconds()
+            let totalMonths =
+                (
+                    (now.getFullYear()
+                    - start.getFullYear())
+                    * 12
+                )
+                +
+                (
+                    now.getMonth()
+                    - start.getMonth()
                 );
 
 
             /*
-             * Handle cases where anniversary
-             * has not yet occurred this month.
+             * Candidate date after adding
+             * complete months.
              */
 
-            if (anniversary > now) {
-
-                months--;
-
-                if (months < 0) {
-
-                    years--;
-
-                    months += 12;
-                }
+            let candidate =
+                new Date(start);
 
 
-                anniversary =
-                    new Date(
-                        start.getFullYear() + years,
-                        start.getMonth() + months,
-                        start.getDate(),
-                        start.getHours(),
-                        start.getMinutes(),
-                        start.getSeconds()
-                    );
+            candidate.setMonth(
+                candidate.getMonth()
+                + totalMonths
+            );
+
+
+            /*
+             * If candidate is in the future,
+             * remove one month.
+             */
+
+            if (candidate > now) {
+
+                totalMonths--;
+
+                candidate =
+                    new Date(start);
+
+                candidate.setMonth(
+                    candidate.getMonth()
+                    + totalMonths
+                );
+
             }
 
 
             /*
-             * Remaining time after
-             * complete months.
+             * =====================================
+             * REMAINING TIME
+             * =====================================
              */
 
-            let difference =
+            let remaining =
                 now.getTime()
-                - anniversary.getTime();
+                -
+                candidate.getTime();
 
 
             const SECOND =
                 1000;
 
+
             const MINUTE =
-                60 * SECOND;
+                SECOND * 60;
+
 
             const HOUR =
-                60 * MINUTE;
+                MINUTE * 60;
+
 
             const DAY =
-                24 * HOUR;
+                HOUR * 24;
 
+
+            /*
+             * Days
+             */
 
             const days =
                 Math.floor(
-                    difference / DAY
+                    remaining / DAY
                 );
 
 
-            difference %= DAY;
+            remaining =
+                remaining % DAY;
 
+
+            /*
+             * Hours
+             */
 
             const hours =
                 Math.floor(
-                    difference / HOUR
+                    remaining / HOUR
                 );
 
 
-            difference %= HOUR;
+            remaining =
+                remaining % HOUR;
 
+
+            /*
+             * Minutes
+             */
 
             const minutes =
                 Math.floor(
-                    difference / MINUTE
-  
+                    remaining / MINUTE
+                );
+
+
+            remaining =
+                remaining % MINUTE;
+
+
+            /*
+             * Seconds
+             */
+
+            const seconds =
+                Math.floor(
+                    remaining / SECOND
+                );
+
+
+            return {
+
+                months:
+                    totalMonths,
+
+                days:
+                    days,
+
+                hours:
+                    hours,
+
+                minutes:
+                    minutes,
+
+                seconds:
+                    seconds
+
+            };
+
+        }
+
+
+        /* =========================================
+           UPDATE COUNTER
+        ========================================= */
+
+        function updateLiveCounters() {
+
+
+            const elapsed =
+                calculateElapsed();
+
+
+            /*
+             * Always show at least
+             * two digits.
+             */
+
+            const pad =
+                (number) =>
+                    String(number)
+                    .padStart(2, "0");
+
+
+            document.getElementById(
+                "val-months"
+            ).textContent =
+                pad(elapsed.months);
+
+
+            document.getElementById(
+                "val-days"
+            ).textContent =
+                pad(elapsed.days);
+
+
+            document.getElementById(
+                "val-hours"
+            ).textContent =
+                pad(elapsed.hours);
+
+
+            document.getElementById(
+                "val-mins"
+            ).textContent =
+                pad(elapsed.minutes);
+
+
+            document.getElementById(
+                "val-secs"
+            ).textContent =
+                pad(elapsed.seconds);
+
+        }
+
+
+        /* =========================================
+           3D PARALLAX
+        ========================================= */
+
+        function setupSmoothParallax() {
+
+
+            const wrapper =
+                document.getElementById(
+                    "card-wrapper"
+                );
+
+
+            const inner =
+                document.getElementById(
+                    "card-inner"
+                );
+
+
+            const glare =
+                document.getElementById(
+                    "card-glare"
+                );
+
+
+            let targetX = 0;
+
+            let targetY = 0;
+
+            let currentX = 0;
+
+            let currentY = 0;
+
+            let isHovering = false;
+
+            let glareX = 50;
+
+            let glareY = 50;
+
+
+            const ease =
+                0.12;
+
+
+            /*
+             * Mouse movement
+             */
+
+            wrapper.addEventListener(
+                "mousemove",
+                (event) => {
+
+
+                    isHovering = true;
+
+
+                    const rect =
+                        wrapper
+                        .getBoundingClientRect();
+
+
+                    const x =
+                        event.clientX
+                        -
+                        rect.left;
+
+
+                    const y =
+                        event.clientY
+                        -
+                        rect.top;
+
+
+                    const centerX =
+                        rect.width / 2;
+
+
+                    const centerY =
+                        rect.height / 2;
+
+
+                    targetX =
+                        (
+                            (y - centerY)
+                            / centerY
+                        )
+                        * -20;
+
+
+                    targetY =
+                        (
+                            (x - centerX)
+                            / centerX
+                        )
+                        * 20;
+
+
+                    glareX =
+                        (x / rect.width)
+                        * 100;
+
+
+                    glareY =
+                        (y / rect.height)
+                        * 100;
+
+                }
+            );
+
+
+            /*
+             * Mouse leaves card
+             */
+
+            wrapper.addEventListener(
+                "mouseleave",
+                () => {
+
+                    isHovering = false;
+
+                    targetX = 0;
+
+                    targetY = 0;
+
+                    glareX = 50;
+
+                    glareY = 50;
+
+                }
+            );
+
+
+            /*
+             * Smooth animation
+             */
+
+            function render() {
+
+
+                currentX +=
+                    (
+                        targetX
+                        -
+                        currentX
+                    )
+                    * ease;
+
+
+                currentY +=
+                    (
+                        targetY
+                        -
+                        currentY
+                    )
+                    * ease;
+
+
+                const scale =
+                    isHovering
+                    ? 1.04
+                    : 1;
+
+
+                inner.style.transform =
+                    `
+                    rotateX(${currentX}deg)
+                    rotateY(${currentY}deg)
+                    scale(${scale})
+                    `;
+
+
+                if (isHovering) {
+
+                    glare.style.background =
+                        `
+                        radial-gradient(
+                            circle at
+                            ${glareX}%
+                            ${glareY}%,
+                            rgba(255,255,255,0.45)
+                            0%,
+                            transparent 65%
+                        )
+                        `;
+
+                }
+
+
+                requestAnimationFrame(
+                    render
+                );
+
+            }
+
+
+            render();
+
+        }
+
+
+        /* =========================================
+           START
+        ========================================= */
+
+        window.addEventListener(
+            "DOMContentLoaded",
+            () => {
+
+
+                initializeCard();
+
+
+                setupSmoothParallax();
+
+
+                /*
+                 * Update immediately
+                 */
+
+                updateLiveCounters();
+
+
+                /*
+                 * Update every second
+                 */
+
+                setInterval(
+                    updateLiveCounters,
+                    1000
+                );
+
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>
